@@ -1,0 +1,9 @@
+{
+    "name": "Samsung",
+    "color": "gris",
+    "price": 900000,
+    "stock": 10,
+    "code": "Sam0123",
+    "published": true,
+    "creationDate": "15/08/2022"
+}

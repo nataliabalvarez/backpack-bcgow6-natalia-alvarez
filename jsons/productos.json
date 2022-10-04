@@ -1,0 +1,35 @@
+
+{
+    "Products": [
+        {
+            "Id": 1,
+            "Name": "Samsung",
+            "Color": "gris",
+            "Price": 900000,
+            "Stock": 10,
+            "Code": "Sam0123",
+            "Published": true,
+            "CreationDate": "15/08/2022"
+        },
+        {
+            "Id": 2,
+            "Name": "Samsung",
+            "Color": "blanco",
+            "Price": 95000,
+            "Stock": 100,
+            "Code": "Sam0124",
+            "Published": true,
+            "CreationDate": "15/09/2022"
+        },
+        {
+            "Id": 3,
+            "Name": "Philip",
+            "Color": "gris",
+            "Price": 97000,
+            "Stock": 100,
+            "Code": "Phil0124",
+            "Published": false,
+            "CreationDate": "21/09/2022"
+        }
+    ]
+}
