@@ -15,6 +15,8 @@ func main(){
 	pr := router.Group("/products")
 	pr.POST("/", handler.Store())
 	pr.GET("/", handler.GetAll())
+	pr.GET("/:id", handler.Get())
+
 
 	router.Run()
 
