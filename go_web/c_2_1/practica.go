@@ -4,7 +4,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	structs "github.com/nataliabalvarez/backpack-bcgow6-natalia-alvarez/structs"
+	"github.com/nataliabalvarez/backpack-bcgow6-natalia-alvarez/structs"
 )
 
 var products []structs.Product
