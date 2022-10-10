@@ -23,7 +23,7 @@ type Repository interface {
 	LastID() (int, error)
 	Put(id int, name, color string, price float64, stock int, code string, published bool, creationDate string) (Product, error)
 	Patch(id int, name, color string, price float64, stock int, code string, published bool, creationDate string) (Product, error)
-
+	Delete(id int) error
 }
 type repository struct{} //struct implementa los metodos de la interfaz
 
@@ -97,4 +97,14 @@ func (r *repository) Patch(id int, name, color string, price float64, stock int,
 	}
 
 	return Product{}, fmt.Errorf("producto %d no encontrado", id)
+}
+
+func (r *repository) Delete(id int) error {
+	for i := range products {
+		if products[i].Id == id {
+			products = append(products[:i], products[i+1:]...)
+			return nil
+		}
+	}
+	return fmt.Errorf("producto %d no encontrado", id)
 }

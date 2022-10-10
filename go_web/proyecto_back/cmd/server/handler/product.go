@@ -254,3 +254,28 @@ func (c *Product) Patch() gin.HandlerFunc {
 
 	}
 }
+
+func (c *Product) Delete() gin.HandlerFunc {
+	return func(ctx *gin.Context) {
+		//verificar token
+		token := ctx.GetHeader("token")
+		if token != "autorizedtoken123" {
+			ctx.JSON(http.StatusUnauthorized, gin.H{
+				"error": "token inválido",
+			})
+			return
+		}
+
+		id, err := strconv.ParseInt(ctx.Param("id"), 10, 64)
+		if err != nil {
+			ctx.JSON(http.StatusNotFound, gin.H{"error": err.Error()})
+			return
+		}
+
+		if err := c.service.Delete(int(id)); err != nil {
+			ctx.JSON(http.StatusNotFound, gin.H{"error": err.Error()})
+			return
+		}
+		ctx.JSON(http.StatusNoContent, nil)
+	}
+}

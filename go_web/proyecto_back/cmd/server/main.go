@@ -19,6 +19,7 @@ func main() {
 	pr.GET("/:id", handler.Get())
 	pr.PUT("/:id", handler.Put())
 	pr.PATCH("/:id", handler.Patch())
+	pr.DELETE("/:id", handler.Delete())
 
 	router.Run()
 }
