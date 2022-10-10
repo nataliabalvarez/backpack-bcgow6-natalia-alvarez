@@ -1,11 +1,12 @@
 package main
 
-import(
+import (
 	"github.com/gin-gonic/gin"
 	"github.com/nataliabalvarez/backpack-bcgow6-natalia-alvarez/go_web/proyecto_back/cmd/server/handler"
 	"github.com/nataliabalvarez/backpack-bcgow6-natalia-alvarez/go_web/proyecto_back/internal/products"
 )
-func main(){
+
+func main() {
 	repo := products.NewRepository()
 	service := products.NewService(repo)
 	handler := handler.NewProduct(service)
@@ -16,8 +17,8 @@ func main(){
 	pr.POST("/", handler.Store())
 	pr.GET("/", handler.GetAll())
 	pr.GET("/:id", handler.Get())
-
+	pr.PUT("/:id", handler.Put())
+	pr.PATCH("/:id", handler.Patch())
 
 	router.Run()
-
 }

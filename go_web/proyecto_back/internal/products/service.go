@@ -14,7 +14,8 @@ type Service interface {
 	Get(id int) (Product, error)
 	GetAll() ([]Product, error)
 	Store(name, color string, price float64, stock int, code string, published bool, creationDate string) (Product, error)
-	//Update(id int, name , color string, price float64, stock int, code string, published bool, creationDate string) (Product, error)
+	Put(id int, name, color string, price float64, stock int, code string, published bool, creationDate string) (Product, error)
+	Patch(id int, name, color string, price float64, stock int, code string, published bool, creationDate string) (Product, error)
 }
 
 func (s *service) Store(name, color string, price float64, stock int, code string, published bool, creationDate string) (Product, error) {
@@ -43,4 +44,23 @@ func (s *service) GetAll() ([]Product, error) {
 		return nil, err
 	}
 	return products, nil
+}
+
+func (s *service) Put(id int, name, color string, price float64, stock int, code string, published bool, creationDate string) (Product, error) {
+
+	product, err := s.repository.Put(id, name, color, price, stock, code, published, creationDate)
+
+	if err != nil {
+		return Product{}, err
+	}
+
+	return product, nil
+}
+func (s *service) Patch(id int, name, color string, price float64, stock int, code string, published bool, creationDate string) (Product, error) {
+	product, err := s.repository.Patch(id, name, color, price, stock, code, published, creationDate)
+	if err != nil {
+		return Product{}, err
+	}
+
+	return product, nil
 }
