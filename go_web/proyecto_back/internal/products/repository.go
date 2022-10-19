@@ -1,6 +1,10 @@
 package products
 
-import "fmt"
+import (
+	"fmt"
+
+	"github.com/nataliabalvarez/backpack-bcgow6-natalia-alvarez/go_web/proyecto_back/pkg/store"
+)
 
 type Product struct {
 	Id           int     `json:"id"`
@@ -13,7 +17,7 @@ type Product struct {
 	CreationDate string  `json:"creationDate"`
 }
 
-var products []Product
+// var products []Product
 var lastId int
 
 type Repository interface {
@@ -25,74 +29,119 @@ type Repository interface {
 	Patch(id int, name, color string, price float64, stock int, code string, published bool, creationDate string) (Product, error)
 	Delete(id int) error
 }
-type repository struct{} //struct implementa los metodos de la interfaz
+type repository struct {
+	db store.Store
+} //struct implementa los metodos de la interfaz
 
-func NewRepository() Repository {
-	return &repository{}
+func NewRepository(db store.Store) Repository {
+	return &repository{
+		db: db,
+	}
 }
 
 func (r *repository) Store(id int, name, color string, price float64, stock int, code string, published bool, creationDate string) (Product, error) {
+
+	var ps []Product
+
+	r.db.Read(&ps) //writes json into ps struct
+
 	prod := Product{id, name, color, price, stock, code, published, creationDate}
-	products = append(products, prod)
+
+	ps = append(ps, prod)
+	if err := r.db.Write(ps); err != nil {
+		return Product{}, err
+	}
+
 	lastId = prod.Id
+
 	return prod, nil
 }
 
 func (r *repository) Get(id int) (Product, error) {
-	for i := range products {
-		if products[i].Id == id {
-			return products[i], nil
+	var ps []Product
+	err := r.db.Read(&ps)
+	if err != nil {
+		return Product{}, err
+	}
+	for i := range ps {
+		if ps[i].Id == id {
+			return ps[i], nil
 		}
 	}
 	return Product{}, fmt.Errorf("producto %d no encontrado", id)
 }
 
 func (r *repository) GetAll() ([]Product, error) {
-	return products, nil
+	var ps []Product
+	err := r.db.Read(&ps)
+	if err != nil {
+		return nil, err
+	}
+	return ps, nil
 }
 
 func (r *repository) LastID() (int, error) {
-	return lastId, nil
+	//return lastId, nil
+	var ps []Product
+	err := r.db.Read(&ps)
+	if err != nil {
+		return 0, err
+	}
+	if len(ps) == 0 {
+		return 0, nil
+	}
+
+	return ps[len(ps)-1].Id, nil
 }
 
 func (r *repository) Put(id int, name, color string, price float64, stock int, code string, published bool, creationDate string) (Product, error) {
 	aux := Product{id, name, color, price, stock, code, published, creationDate}
-	for i := range products {
-		if products[i].Id == id {
-			products[i] = aux
-			return products[i], nil
+	var ps []Product
+	err := r.db.Read(&ps)
+	if err != nil {
+		return Product{}, err
+	}
+	for i := range ps {
+		if ps[i].Id == id {
+			ps[i] = aux
+			//modificar en json
+			return ps[i], nil
 		}
 	}
 	return Product{}, fmt.Errorf("producto %d no encontrado", id)
 }
 
 func (r *repository) Patch(id int, name, color string, price float64, stock int, code string, published bool, creationDate string) (Product, error) {
-
-	for i := range products {
-		if products[i].Id == id {
+	var ps []Product
+	err := r.db.Read(&ps)
+	if err != nil {
+		return Product{}, err
+	}
+	for i := range ps {
+		if ps[i].Id == id {
 			if name != "" {
-				products[i].Name = name
+				ps[i].Name = name
 			}
 			if color != "" {
-				products[i].Color = color
+				ps[i].Color = color
 			}
 			if price != 0 {
-				products[i].Price = price
+				ps[i].Price = price
 			}
 			if stock != 0 {
-				products[i].Stock = stock
+				ps[i].Stock = stock
 			}
 			if code != "" {
-				products[i].Code = code
+				ps[i].Code = code
 			}
 			if published {
-				products[i].Published = published				
+				ps[i].Published = published
 			}
 			if creationDate != "" {
-				products[i].CreationDate = creationDate
+				ps[i].CreationDate = creationDate
 			}
 
-			return products[i], nil			
+			return ps[i], nil
 		}
 	}
 
@@ -100,9 +149,14 @@ func (r *repository) Patch(id int, name, color string, price float64, stock int,
 }
 
 func (r *repository) Delete(id int) error {
-	for i := range products {
-		if products[i].Id == id {
-			products = append(products[:i], products[i+1:]...)
+	var ps []Product
+	err := r.db.Read(&ps)
+	if err != nil {
+		return err
+	}
+	for i := range ps {
+		if ps[i].Id == id {
+			ps = append(ps[:i], ps[i+1:]...)
 			return nil
 		}
 	}

@@ -1,0 +1,27 @@
+1_ ¿Cuáles son las diferencias entre White Box y Black Box? 
+El testing de black box es un metodo de testing del cual no se conoce su funcionamiento interno
+ni es lo que importa al momento de utilizarlo, sino que la finalidad de este
+tipo de testing es solo comprobar la devolucion de un codigo al utilizarlo, es decir,
+importa lo que retorna, no como hace para retornarlo.
+En cambio el testing de white box es importante concer la implementacion del codigo testing ya que este
+es de vital importancia para comprobar el flujo y la correcta implementacion del codigo a testear y las
+vulnerabilidades que pudiera presentar.
+
+2_ ¿Qué es un test funcional?.
+Los tst funcionales son del tipo black box y se lleva acabo luego de los test unitarios y de integracion,
+ya que prueban que el codigo haga lo que debe, es decir, que las respuestas del codigo sean las esperadas ante
+distintos escenarios que se le presente.
+
+3_ ¿Qué es un Test de Integración?
+Los test de integracion prueban la correcta comunicacion entre los distintos modulos del software, que quellos
+modulos que fueron testeados de manera unitaria, funcionen correctamente y en armonia cuando se comunican entre ellos.
+
+4_ Indicar las dimensiones de calidad prioritarias en MELI.
+Meli se basa en el principio FIRST:
+-Fast: la posibilidad de tener muchos test y que sean rapidos de ejecutar.
+-Isolated: cumpliendo con "given", "when", "then".
+-Repeteable: sin depender de datos de ambiente para funcionar.
+-Self Validating: 
+-Throught: cubriendo cada escenario de un caso de uso, errores, exepciones, etc.
+
+

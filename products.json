@@ -1,0 +1,62 @@
+[
+   {
+      "id": 1,
+      "name": "",
+      "color": "",
+      "price": 0,
+      "stock": 0,
+      "code": "",
+      "published": false,
+      "creationDate": ""
+   },
+   {
+      "id": 2,
+      "name": "",
+      "color": "",
+      "price": 0,
+      "stock": 0,
+      "code": "",
+      "published": false,
+      "creationDate": ""
+   },
+   {
+      "id": 3,
+      "name": "",
+      "color": "",
+      "price": 0,
+      "stock": 0,
+      "code": "",
+      "published": false,
+      "creationDate": ""
+   },
+   {
+      "id": 4,
+      "name": "Samsung",
+      "color": "gris",
+      "price": 900000,
+      "stock": 10,
+      "code": "Sam0123",
+      "published": true,
+      "creationDate": "15/08/2022"
+   },
+   {
+      "id": 5,
+      "name": "Samsung",
+      "color": "gris",
+      "price": 900000,
+      "stock": 10,
+      "code": "Sam0123",
+      "published": true,
+      "creationDate": "15/08/2022"
+   },
+   {
+      "id": 6,
+      "name": "Samsung",
+      "color": "gris",
+      "price": 900000,
+      "stock": 10,
+      "code": "Sam0123",
+      "published": true,
+      "creationDate": "15/08/2022"
+   }
+]
