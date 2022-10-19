@@ -17,11 +17,14 @@ Los test de integracion prueban la correcta comunicacion entre los distintos mod
 modulos que fueron testeados de manera unitaria, funcionen correctamente y en armonia cuando se comunican entre ellos.
 
 4_ Indicar las dimensiones de calidad prioritarias en MELI.
-Meli se basa en el principio FIRST:
--Fast: la posibilidad de tener muchos test y que sean rapidos de ejecutar.
--Isolated: cumpliendo con "given", "when", "then".
--Repeteable: sin depender de datos de ambiente para funcionar.
--Self Validating: 
--Throught: cubriendo cada escenario de un caso de uso, errores, exepciones, etc.
+Standard ISO 25010:
+funcionalidad: adaptado al requerimniento del usuario
+requerimiento, performance
+compatibilidad
+usabilidad
+fiabilidad
+seguridad
+mantenibilidad
+portabilidad
 
 
