@@ -6,19 +6,19 @@ import (
 	"github.com/nataliabalvarez/backpack-bcgow6-natalia-alvarez/go_web/proyecto_back/pkg/store"
 )
 
-type Product struct {
-	Id           int     `json:"id"`
-	Name         string  `json:"name"`
-	Color        string  `json:"color"`
-	Price        float64 `json:"price"`
-	Stock        int     `json:"stock"`
-	Code         string  `json:"code"`
-	Published    bool    `json:"published"`
-	CreationDate string  `json:"creationDate"`
-}
 
 // var products []Product
 var lastId int
+
+type repository struct {
+	db store.Store
+} //struct implementa los metodos de la interfaz
+
+func NewRepository(db store.Store) Repository {
+	return &repository{
+		db: db,
+	}
+}
 
 type Repository interface {
 	Get(id int) (Product, error)
@@ -28,15 +28,6 @@ type Repository interface {
 	Put(id int, name, color string, price float64, stock int, code string, published bool, creationDate string) (Product, error)
 	Patch(id int, name, color string, price float64, stock int, code string, published bool, creationDate string) (Product, error)
 	Delete(id int) error
-}
-type repository struct {
-	db store.Store
-} //struct implementa los metodos de la interfaz
-
-func NewRepository(db store.Store) Repository {
-	return &repository{
-		db: db,
-	}
 }
 
 func (r *repository) Store(id int, name, color string, price float64, stock int, code string, published bool, creationDate string) (Product, error) {
