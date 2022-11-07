@@ -1,0 +1,41 @@
+CREATE DATABASE biblioteca;
+
+CREATE TABLE autor
+(
+idAutor VARCHAR(10) PRIMARY KEY NOT NULL,
+Nombre VARCHAR(30) NOT NULL,
+Nacionalidad VARCHAR(30) NOT NULL
+);
+
+CREATE TABLE estudiante
+(
+idLector VARCHAR(10) PRIMARY KEY NOT NULL,
+Nombre VARCHAR(30) NOT NULL,
+Apellido VARCHAR(30) NOT NULL,
+Direccion VARCHAR(30) NOT NULL,
+Carrera VARCHAR(30) NOT NULL,
+Edad INT NOT NULL
+);
+
+CREATE TABLE libro
+(
+idLibro VARCHAR(10) PRIMARY KEY NOT NULL,
+Titulo VARCHAR(30) NOT NULL,
+Editorial VARCHAR(30) NOT NULL,
+Area VARCHAR(30) NOT NULL
+);
+
+CREATE TABLE libroautor
+(
+FOREIGN KEY (idAutor) REFERENCES autor(idAutor),
+FOREIGN KEY (idLibro) REFERENCES libro(idLibro)
+);
+
+CREATE TABLE prestamo
+(
+FOREIGN KEY (idLector) REFERENCES estudiante(idLector),
+FOREIGN KEY (idLibro) REFERENCES libro(idLibro),
+FechaPrestamo VARCHAR(30) NOT NULL,
+FechaDevolucion VARCHAR(30) NOT NULL,
+Devuelto BOOL NOT NULL
+)
